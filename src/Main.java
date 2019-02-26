@@ -13,7 +13,9 @@ public class Main {
 		aCar1.start();
 		aCar2.start();
 		aCar3.start(); 
-		//aCar4.start(); aCar5.start(); aCar6.start();
+		//aCar4.start(); 
+		//aCar5.start();
+		//aCar6.start();
 
 	}
 

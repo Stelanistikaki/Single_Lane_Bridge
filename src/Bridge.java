@@ -3,45 +3,42 @@ public class Bridge {
 	
 	int redCars = 0;
 	int blueCars = 0;
-	boolean carCrossing = false, redCarWaiting= false, blueCarWaiting= false ;
+	boolean carCrossing = false;
 	
 	public void redCarArrives(int id) {
 		System.out.println(id + " car is here!");
 		redCars++;
-		System.out.println("printing red cars: " + redCars);
 	}
 	
 	public void blueCarArrives(int id) {
 		System.out.println(id + " car is here!");
 		blueCars++;
-		System.out.println("printing blue cars: " + blueCars);
 		
 	}
 	
-	public boolean redCarEnters(int id) {
-		if(blueCars > 0 && blueCarWaiting)
+	synchronized boolean redCarEnters(int id) {
+		if(blueCars > 0 && carCrossing)
 			try {
 				System.out.println(id + " car is waiting");
-				redCarWaiting = true;
+				//redCarWaiting = true;
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		else {
 			System.out.println(id + " car is entering!");
-			redCarWaiting = false;
+			//redCarWaiting = false;
 			carCrossing = true;
 		}
 		
 		return carCrossing;
 	}
 	
-	public boolean blueCarEnters(int id) {
-		if(redCars > 0)
+	synchronized boolean blueCarEnters(int id) {
+		if(redCars > 0 && carCrossing)
 			try {
 				System.out.println(id + " car is waiting");
-				blueCarWaiting = true;
+				//blueCarWaiting = true;
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -60,14 +57,12 @@ public class Bridge {
 		System.out.println( id + " car exits!");
 		carCrossing = false;
 		redCars --;
-		System.out.println("printing red cars: " + redCars);
 	}
 	
 	public void blueCarExits(int id) {
 		System.out.println( id + " car exits!");
 		carCrossing = false;
 		blueCars --;
-		System.out.println("printing blue cars: " + blueCars);
 	}
 
 }

@@ -17,8 +17,5 @@ public class BlueCar extends Car{
 		}
 		//super.run();	
 	}
-	
-	
-	
 
 }
